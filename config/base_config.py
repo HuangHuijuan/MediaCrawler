@@ -8,6 +8,7 @@
 # 详细许可条款请参阅项目根目录下的LICENSE文件。
 # 使用本代码即表示您同意遵守上述原则和LICENSE中的所有条款。
 
+import csv
 
 # 基础配置
 PLATFORM = "xhs"
@@ -46,7 +47,7 @@ HEADLESS = False
 SAVE_LOGIN_STATE = True
 
 # 数据保存类型选项配置,支持三种类型：csv、db、json, 最好保存到DB，有排重的功能。
-SAVE_DATA_OPTION = "json"  # csv or db or json
+SAVE_DATA_OPTION = "csv"  # csv or db or json
 
 # 用户浏览器缓存的浏览器文件配置
 USER_DATA_DIR = "%s_user_data_dir"  # %s will be replaced by platform name
@@ -85,6 +86,12 @@ XHS_SPECIFIED_NOTE_URL_LIST = [
     "https://www.xiaohongshu.com/explore/66fad51c000000001b0224b8?xsec_token=AB3rO-QopW5sgrJ41GwN01WCXh6yWPxjSoFI9D5JIMgKw=&xsec_source=pc_search"
     # ........................
 ]
+XHS_NOTE_URL_CSV_PATH = '/Users/annie/Documents/自媒体爬虫/笔记id.csv'
+if XHS_NOTE_URL_CSV_PATH:
+    with open(XHS_NOTE_URL_CSV_PATH, 'r') as file:
+        csv_reader = csv.reader(file)
+        url_list = list(csv_reader)
+        XHS_SPECIFIED_NOTE_URL_LIST = [l[0] for l in url_list]
 
 # 指定抖音需要爬取的ID列表
 DY_SPECIFIED_ID_LIST = [
